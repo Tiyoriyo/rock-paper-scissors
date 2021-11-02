@@ -9,31 +9,26 @@ function playRound(playerSelection, computerSelection) {
     computerSelection = computerPlay();
     playerSelection = prompt('Rock, paper, or scissors?', '');
 
-    let lose = `You lose! ${playerSelection} beats ${computerSelection}`;
-    let win = `You win! ${playerSelection} beats ${computerSelection}`;
-
     let playerSelectionLC = playerSelection.toLowerCase();
     let playerSelectionFinal = playerSelectionLC.charAt(0).toUpperCase() + playerSelectionLC.slice(1);
    
-
     if (moves.indexOf(playerSelectionFinal) < 0) {
         alert('You can only input \'Rock\', \'Paper\' or \'Scissors\'.');
         return playRound();
     } 
     
     if (playerSelectionFinal == 'Rock' && computerSelection == 'Scissors') {
-        console.log('You win! Rock beats scissors.');
-        return true;
+        return 'You win! Rock beats scissors.';
     } else if (playerSelectionFinal == 'Paper' && computerSelection == 'Rock') {
-        console.log('You win! Paper beats rock.');
-        return true;
+        return 'You win! Paper beats rock.';
     } else if (playerSelectionFinal == 'Scissors' && computerSelection == 'Paper') {
-        console.log('You win! Rock beats scissors.');
-        return true;
+        return 'You win! Scissors beats paper.';
+    } else if (playerSelectionFinal == computerSelection) {
+        return 'Tie!';
+    } else if (playerSelection == null) {
+        return 'No moves were made';
     } else {
-        console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
-        return false;
-        
+        return `You lose! ${computerSelection} beats ${playerSelectionFinal}`;
     }
 }
 
@@ -49,16 +44,19 @@ function game() {
     }
 
     while (playerPoints != winRoundCount || computerPoints != winRoundCount) {
-        if (playRound() == true) {
+        if (playRound() == 'You win! Rock beats scissors.') {
             playerPoints = playerPoints + 1;
             console.log(playerPoints);
             console.log(computerPoints);
-        } else if (playRound() == true) {
+        } else if (playRound() == 'You win! Paper beats rock.') {
             playerPoints = playerPoints + 1;
             console.log(playerPoints);
             console.log(computerPoints);
-        } else if (playRound() == true) {
+        } else if (playRound() == 'You win! Scissors beats paper.') {
             playerPoints = playerPoints + 1;
+            console.log(playerPoints);
+            console.log(computerPoints);
+        } else if (playRound() == 'Tie!') {
             console.log(playerPoints);
             console.log(computerPoints);
         } else {
