@@ -1,0 +1,33 @@
+html {
+    background-color: #f1faee;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+   
+    
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#game-name,
+#game-author {
+    color: #e63946;
+    font-weight: bold;
+}
+
+#game-name {
+    font-size: 48px;
+    margin: 24px;
+}
+
+#game-author {
+    font-size: 24px;
+    font-style: italic;
+    margin: 0 auto 24px auto;
+}
+
