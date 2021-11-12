@@ -11,20 +11,13 @@
     <header class="header">
         <h1 id="game-name">Rock Paper Scissors</h1>
         <h2 id="game-author">by tiyo</h2>
-        <hr>
     </header>
     <main class="main">
         <div class="instruction"></div>
         <div class="moves">
-            <div class="picture-box">
-                <img src='images/rock.png' width="200px">
-            </div>
-            <div class="picture-box">
-                <img src="images/Paper.png" width="200px">
-            </div>
-            <div class="picture-box">
-                <img src='images/scissors.png' width="200px">
-            </div>
+            <img src='images/rock.png' width="200px" class="picture" id="rock">
+            <img src="images/Paper.png" width="200px" class='picture' id='paper'>
+            <img src='images/scissors.png' width="200px" class='picture' id='scissors'>
         </div>
     </main>
     <section class="win-count">
@@ -37,7 +30,7 @@
             <p class="count">0</p>
         </div>
     </section>
-
+    <button id="btn">click me</button>
 
     <script src="calculator.js"></script>
 </body>
