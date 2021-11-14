@@ -1,10 +1,23 @@
 const moves = ['Rock', 'Paper', 'Scissors'];
 
+let playerCount = 0;
+let computerCount = 0;
+
+let result = '';
+
 const rock = document.getElementById('rock');
 const paper = document.getElementById('paper');
 const scissors = document.getElementById('scissors');
-
 const buttons = document.querySelectorAll('.picture');
+const playerCountP = document.querySelector('#p-count');
+const computerCountC = document.querySelector('#c-count')
+
+playerCountP.textContent = playerCount;
+computerCountC.textContent = computerCount;
+
+rock.style.cursor = 'pointer';
+paper.style.cursor = 'pointer';
+scissors.style.cursor = 'pointer';
 
 buttons.forEach((buttons) => {
     buttons.addEventListener('click', (e) => {
@@ -18,92 +31,62 @@ buttons.forEach((buttons) => {
     });
 });
 
-rock.style.cursor = 'pointer';
-paper.style.cursor = 'pointer';
-scissors.style.cursor = 'pointer';
-
 function computerPlay() {
     let num = Math.floor(Math.random() * 3);
     return moves[num];
 }
 
+
 function playRound(playerSelection, computerSelection) {
+    const instruction = document.querySelector('.instruction');
     computerSelection = computerPlay();
     computerSelectionString = computerSelection.toString();
-    
+
+
     if (playerSelection == 'Rock' && computerSelection == 'Scissors') {
-        console.log('You win! Rock beats scissors.');
-        return 'You win! Rock beats scissors.';
+        instruction.textContent = 'You win! Rock beats scissors.';
+        playerCount++;
+        playerCountP.textContent = playerCount;
+        computerCountC.textContent = computerCount;
+
+        return;
+
     } else if (playerSelection == 'Paper' && computerSelection == 'Rock') {
-        console.log('You win! Paper beats rock.');
-        return 'You win! Paper beats rock.';
+        instruction.textContent = 'You win! Paper beats rock.';
+        playerCount++;
+        playerCountP.textContent = playerCount;
+        computerCountC.textContent = computerCount;
+
+        return;
+
     } else if (playerSelection == 'Scissors' && computerSelection == 'Paper') {
-        console.log('You win! Scissors beat paper.');
-        return 'You win! Scissors beat paper.';
+        instruction.textContent = 'You win! Scissors beat paper.';
+        playerCount++;
+        playerCountP.textContent = playerCount;
+        computerCountC.textContent = computerCount;
+        return;
+
     } else if (playerSelection == computerSelection) {
-        console.log('Tie!');
-        return 'Tie!';
+        instruction.textContent = 'Tie!';
+        return;
+
     } else {
-        console.log(`You lose! ${computerSelection} beats ${playerSelection}`)
-        return `You lose! ${computerSelection} beats ${playerSelection}`;
+        instruction.textContent = `You lose! ${computerSelection} beats ${playerSelection}`;
+        computerCount++;
+        playerCountP.textContent = playerCount;
+        computerCountC.textContent = computerCount;
+        return;
     }
+
+    playerCountP.textContent = playerCount;
+    computerCountC.textContent = computerCount;
+
 }
 
-function game() {
-    const winRoundCount = parseInt(prompt('How many rounds are needed to win the game?', ''));
-    let playerCount = 0;
-    let computerCount = 0;
 
 
-    if (isNaN(winRoundCount) == true) {
-        alert('You need to type in a number');
-        return game();
-    } else {
-        while (playerCount != winRoundCount && computerCount != winRoundCount) {
-            switch (playRound()) {
-                case 'You win! Rock beats scissors.': 
-                    {
-                        console.log('You win! Rock beats scissors');
-                        ++playerCount;
-                        console.log(playerCount);
-                        console.log(computerCount);
-                        break;
-                    }
-                case 'You win! Paper beats rock.':
-                    {
-                        console.log('You win! Paper beats rock');
-                        ++playerCount;
-                        console.log(playerCount);
-                        console.log(computerCount);
-                        break;
-                    }
-                case 'You win! Scissors beat paper.':
-                    {
-                        console.log('You win! Scissors beat paper');
-                        ++playerCount;
-                        console.log(playerCount);
-                        console.log(computerCount);
-                        break;
-                    }
-                case 'Tie!':
-                        console.log('Tie!');
-                        break;
-                default:
-                    {
-                        console.log(`You lose! ${computerSelectionString} beats ${playerSelectionFinal}`);
-                        ++computerCount;
-                        console.log(playerCount);
-                        console.log(computerCount);
-                    }    
-            }
+/*
+Buttons call playRound function and return win/loss/tie 
 
-            if (playerCount == winRoundCount) {
-                return 'Congratulations, you have won the game!';
-            }
 
-            if (computerCount == winRoundCount) {
-                return 'Sorry, you lost..';
-            }
-        }
-    }
-}
+*/
