@@ -47,6 +47,7 @@ html {
     background-color: #a8dadc;
     padding: 5px;
     box-shadow: 0 30px 40px rgba(0,0,0,0.2);
+    transition: all .07s ease;
 }
 
 .win-count {
@@ -91,6 +92,10 @@ html {
 
 #pButton:hover {
     background-color: #b1323c;
+}
+
+.playing {
+    transform: scale(1.1);
 }
 
 .cursor {
