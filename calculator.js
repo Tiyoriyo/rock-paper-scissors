@@ -24,15 +24,24 @@ computerCountHTML.textContent = computerCount;
 let playHandler = function(e) {
     if (e.target.id == 'rock') {
         playRound('rock');
+        ROCK.classList.add('playing');
     } else if (e.target.id == 'paper') {
         playRound('paper');
+        PAPER.classList.add('playing');
     } else if (e.target.id == 'scissors') {
         playRound('scissors')
+        SCISSORS.classList.add('playing');
     }
+}
+
+function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    this.classList.remove('playing');
 }
 
 playMove.forEach(playMove => {
     playMove.addEventListener('click', playHandler);
+    playMove.addEventListener('transitionend', removeTransition);
 });
 
 function computerPlay() {
