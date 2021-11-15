@@ -1,92 +1,91 @@
-const moves = ['Rock', 'Paper', 'Scissors'];
+const moves = ['rock', 'paper', 'scissors'];
+
+const instruction = document.querySelector('#instruction');
+
+const playMove = document.querySelectorAll('.picture')
+const ROCK = document.getElementById('rock');
+const PAPER = document.getElementById('paper');
+const SCISSORS = document.getElementById('scissors');
+
+const playerCountHTML = document.querySelector('#p-count');
+const computerCountHTML = document.querySelector('#c-count');
+const replayContainer = document.querySelector('#play-again');
+
 
 let playerCount = 0;
 let computerCount = 0;
+let winCount = 5;
 
-let result = '';
+playerCountHTML.textContent = playerCount;
+computerCountHTML.textContent = computerCount;
 
-const rock = document.getElementById('rock');
-const paper = document.getElementById('paper');
-const scissors = document.getElementById('scissors');
-const buttons = document.querySelectorAll('.picture');
-const playerCountP = document.querySelector('#p-count');
-const computerCountC = document.querySelector('#c-count')
+let playHandler = function(e) {
+    if (e.target.id == 'rock') {
+        playRound('rock');
+    } else if (e.target.id == 'paper') {
+        playRound('paper');
+    } else if (e.target.id == 'scissors') {
+        playRound('scissors')
+    }
+}
 
-playerCountP.textContent = playerCount;
-computerCountC.textContent = computerCount;
-
-rock.style.cursor = 'pointer';
-paper.style.cursor = 'pointer';
-scissors.style.cursor = 'pointer';
-
-buttons.forEach((buttons) => {
-    buttons.addEventListener('click', (e) => {
-        if (e.target.id=="rock") {
-            playRound('Rock');
-        } else if (e.target.id=='paper') {
-            playRound('Paper');
-        } else if (e.target.id=='scissors') {
-            playRound('Scissors');
-        }
-    });
+playMove.forEach(playMove => {
+    playMove.addEventListener('click', playHandler);
 });
 
 function computerPlay() {
-    let num = Math.floor(Math.random() * 3);
-    return moves[num];
+    let index = Math.floor(Math.random() * 3);
+    return moves[index];
 }
 
+function updateScore() {
+    playerCountHTML.textContent = playerCount;
+    computerCountHTML.textContent = computerCount;
+}
+
+function createReplayButton() {
+    if(playerCount == winCount || computerCount == winCount) {
+        const button = document.createElement('button');
+        button.textContent = 'Play Again';
+        button.setAttribute('id', 'pButton');
+        replayContainer.appendChild(button);
+    }
+}
 
 function playRound(playerSelection, computerSelection) {
-    const instruction = document.querySelector('.instruction');
     computerSelection = computerPlay();
-    computerSelectionString = computerSelection.toString();
-
-
-    if (playerSelection == 'Rock' && computerSelection == 'Scissors') {
-        instruction.textContent = 'You win! Rock beats scissors.';
+    
+    if (playerSelection == 'rock' && computerSelection == 'scissors') {
+        instruction.textContent = 'You win the round, rock beats scissors';
         playerCount++;
-        playerCountP.textContent = playerCount;
-        computerCountC.textContent = computerCount;
+        updateScore();
+        createReplayButton();
 
-        return;
-
-    } else if (playerSelection == 'Paper' && computerSelection == 'Rock') {
-        instruction.textContent = 'You win! Paper beats rock.';
+    } else if (playerSelection == 'paper' && computerSelection == 'rock') {
+        instruction.textContent = 'You win the round, paper beats rock';
         playerCount++;
-        playerCountP.textContent = playerCount;
-        computerCountC.textContent = computerCount;
+        updateScore();
+        createReplayButton();
 
-        return;
-
-    } else if (playerSelection == 'Scissors' && computerSelection == 'Paper') {
-        instruction.textContent = 'You win! Scissors beat paper.';
+    } else if (playerSelection == 'scissors' && computerSelection == 'paper') {
+        instruction.textContent = 'You win the round, scissors beats paper';
         playerCount++;
-        playerCountP.textContent = playerCount;
-        computerCountC.textContent = computerCount;
-        return;
+        updateScore();
+        createReplayButton();
 
     } else if (playerSelection == computerSelection) {
-        instruction.textContent = 'Tie!';
-        return;
+        instruction.textContent = 'It\'s a tie!';
+        updateScore();
 
     } else {
-        instruction.textContent = `You lose! ${computerSelection} beats ${playerSelection}`;
+        instruction.textContent = `You lost the round, ${computerSelection} beats ${playerSelection}`;
         computerCount++;
-        playerCountP.textContent = playerCount;
-        computerCountC.textContent = computerCount;
-        return;
+        updateScore();
+        createReplayButton();
     }
-
-    playerCountP.textContent = playerCount;
-    computerCountC.textContent = computerCount;
-
 }
 
 
 
-/*
-Buttons call playRound function and return win/loss/tie 
 
 
-*/

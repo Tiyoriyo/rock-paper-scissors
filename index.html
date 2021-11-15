@@ -13,24 +13,26 @@
         <h2 id="game-author">by tiyo</h2>
     </header>
     <main class="main">
-        <div class="instruction">Pick a move to play against the computer</div>
+        <div id="instruction">Pick a move to play against the computer</div>
         <div class="moves">
-            <img src='images/rock.png' width="200px" class="picture" id="rock">
-            <img src="images/Paper.png" width="200px" class='picture' id='paper'>
-            <img src='images/scissors.png' width="200px" class='picture' id='scissors'>
+            <img src='images/rock.png' width="200px" class="picture cursor" id="rock">
+            <img src="images/Paper.png" width="200px" class='picture cursor' id='paper'>
+            <img src='images/scissors.png' width="200px" class='picture cursor' id='scissors'>
         </div>
     </main>
     <section class="win-count">
         <div class="count-bar">
-            <p id="count-title">Player Count</p>
-            <p id="p-count"></p>
+            <p class="count-title">Player Count</p>
+            <p id="p-count">0</p>
         </div>
         <div class="count-bar">
-            <p id='count-title'>Computer Count</p>
-            <p id="c-count"></p>
+            <p class='count-title'>Computer Count</p>
+            <p id="c-count">0</p>
         </div>
     </section>
+    <div id='play-again'>
+    </div>
 
-    <script src="calculator.js"></script>
+    <script src="calculator.js" defer></script>
 </body>
 </html>
