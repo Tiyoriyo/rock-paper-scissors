@@ -11,6 +11,8 @@ const playerCountHTML = document.querySelector('#p-count');
 const computerCountHTML = document.querySelector('#c-count');
 const replayContainer = document.querySelector('#play-again');
 
+const button = document.createElement('button');
+
 
 let playerCount = 0;
 let computerCount = 0;
@@ -43,12 +45,38 @@ function updateScore() {
     computerCountHTML.textContent = computerCount;
 }
 
+let resetGame = function() {
+    playerCount = 0;
+    computerCount = 0;
+    updateScore();
+    instruction.textContent = 'Pick a move to play against the computer';
+
+    replayContainer.removeChild(button);
+
+    playMove.forEach(playMove => {
+        playMove.style.cursor = 'pointer';
+        playMove.addEventListener('click', playHandler);
+    });
+}
+
 function createReplayButton() {
     if(playerCount == winCount || computerCount == winCount) {
-        const button = document.createElement('button');
+        playMove.forEach(playMove => {
+            playMove.style.cursor = 'default';
+            playMove.removeEventListener('click', playHandler);
+        });
+
         button.textContent = 'Play Again';
         button.setAttribute('id', 'pButton');
         replayContainer.appendChild(button);
+
+        button.addEventListener('click', resetGame);
+
+        if (playerCount == winCount) {
+            instruction.textContent = 'Congratulations, you won the game!';
+        } else if (computerCount == winCount) {
+            instruction.textContent = 'Sorry, you lost..';
+        }
     }
 }
 
